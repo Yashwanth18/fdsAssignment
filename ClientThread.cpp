@@ -38,7 +38,6 @@ ThreadBody(std::string ip, int port, int id, int orders, int type) {
         timer.Start();
         customerRecord = stub.ReadRecord(order);
         std::cout<<customerRecord.GetCustomerId()<<"\t"<<customerRecord.GetLastOrder()<<std::endl;
-        //std::cout<<record.getCustomerId()<<"\t"<<record.getLastOrder()<<std::endl;
         timer.EndAndMerge();
     }
     else if(laptop_type == 3)

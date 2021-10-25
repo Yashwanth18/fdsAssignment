@@ -31,10 +31,9 @@ void CustomerRecord::Unmarshal(char *buffer) {
     memcpy(&net_customer_id, buffer + offset, sizeof(net_customer_id));
     offset += sizeof(net_customer_id);
     memcpy(&net_last_order, buffer + offset, sizeof(net_last_order));
-    offset += sizeof(net_last_order);
 
     customer_id = ntohl(net_customer_id);
-    net_last_order = ntohl(net_last_order);
+    last_order = ntohl(net_last_order);
 }
 void LaptopOrder::SetOrder(int id, int number, int type) {
 	customer_id = id;

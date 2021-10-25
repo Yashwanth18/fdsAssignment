@@ -39,6 +39,7 @@ LaptopInfo LaptopFactory:: CreateCustomLaptop(LaptopOrder order, int engineer_id
 
 
 CustomerRecord LaptopFactory::RetrieveCustomerRecord(LaptopOrder order){
+    std::cout<<"inside retrieving customer record"<<std::endl;
     CustomerRecord record;
 
     erq_lock.lock();
@@ -124,9 +125,6 @@ void LaptopFactory::ExpertThread(int id) {
 
 void LaptopFactory::addCustomerRecord(const int customer_id, const int latest_order) {
     customer_record[customer_id] = latest_order;
-
-//    for (auto const& pair: customer_record) {
-//    }
 }
 
 int LaptopFactory::getCustomerRecord(const int customer_id) {
