@@ -12,7 +12,13 @@ LaptopOrder ServerStub::ReceiveOrder() {
 	if (socket->Recv(buffer, order.Size(), 0)) {
 		order.Unmarshal(buffer);
 	}
-	return order;	
+	return order;
+}
+
+int ServerStub::ReturnRecord(CustomerRecord customerRecord) {
+    char buffer[32];
+    customerRecord.Marshal(buffer);
+    return socket->Send(buffer,customerRecord.Size(),0);
 }
 
 int ServerStub::SendLaptop(LaptopInfo info) {

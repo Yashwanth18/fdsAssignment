@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 	port = atoi(argv[1]);
-	num_experts = atoi(argv[2]);
+	num_experts = 1;
 
 	for (int i = 0; i < num_experts; i++) {
 		std::thread expert_thread(&LaptopFactory::ExpertThread, 

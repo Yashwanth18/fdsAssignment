@@ -13,6 +13,7 @@ public:
 	ClientStub();
 	int Init(std::string ip, int port);
 	LaptopInfo OrderLaptop(LaptopOrder order);
+    CustomerRecord ReadRecord(LaptopOrder order);
 };
 
 

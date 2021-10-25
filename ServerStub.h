@@ -14,6 +14,7 @@ public:
 	void Init(std::unique_ptr<ServerSocket> socket);
 	LaptopOrder ReceiveOrder();
 	int SendLaptop(LaptopInfo info);
+    int ReturnRecord(CustomerRecord customerRecord);
 };
 
 #endif // end of #ifndef __SERVER_STUB_H__

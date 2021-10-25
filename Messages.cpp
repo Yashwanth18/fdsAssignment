@@ -10,6 +10,32 @@ LaptopOrder::LaptopOrder() {
 	laptop_type = -1;
 }
 
+CustomerRecord::CustomerRecord() {
+    customer_id = -1;
+    last_order  = -1;
+}
+
+void CustomerRecord::Marshal(char *buffer) {
+    int net_customer_id = htonl(customer_id);
+    int net_last_order = htonl(last_order);
+    int offset = 0;
+    memcpy(buffer + offset, &net_customer_id, sizeof(net_customer_id));
+    offset += sizeof(net_customer_id);
+    memcpy(buffer + offset, &net_last_order, sizeof(net_last_order));
+}
+
+void CustomerRecord::Unmarshal(char *buffer) {
+    int net_customer_id;
+    int net_last_order;
+    int offset = 0;
+    memcpy(&net_customer_id, buffer + offset, sizeof(net_customer_id));
+    offset += sizeof(net_customer_id);
+    memcpy(&net_last_order, buffer + offset, sizeof(net_last_order));
+    offset += sizeof(net_last_order);
+
+    customer_id = ntohl(net_customer_id);
+    net_last_order = ntohl(net_last_order);
+}
 void LaptopOrder::SetOrder(int id, int number, int type) {
 	customer_id = id;
 	order_number = number;
@@ -85,8 +111,15 @@ void LaptopInfo::CopyOrder(LaptopOrder order) {
 }
 void LaptopInfo::SetEngineerId(int id) { engineer_id = id; }
 void LaptopInfo::SetExpertId(int id) { expert_id = id; }
-
+void CustomerRecord::SetCustomerId(int customerId) {
+    customer_id = customerId;
+}
+void CustomerRecord::SetLastOrder(int lastOrder) {
+    last_order = lastOrder;
+}
 int LaptopInfo::GetCustomerId() { return customer_id; }
+int CustomerRecord::GetCustomerId() {return customer_id;}
+int CustomerRecord::GetLastOrder() {return  last_order;}
 int LaptopInfo::GetOrderNumber() { return order_number; }
 int LaptopInfo::GetLaptopType() { return laptop_type; }
 int LaptopInfo::GetEngineerId() { return engineer_id; }
@@ -95,6 +128,10 @@ int LaptopInfo::GetExpertId() { return expert_id; }
 int LaptopInfo::Size() {
 	return sizeof(customer_id) + sizeof(order_number) + sizeof(laptop_type)
 		+ sizeof(engineer_id) + sizeof(expert_id);
+}
+
+int CustomerRecord::Size() {
+    return sizeof (customer_id) +sizeof(last_order);
 }
 
 void LaptopInfo::Marshal(char *buffer) {

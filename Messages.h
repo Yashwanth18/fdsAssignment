@@ -3,6 +3,25 @@
 
 #include <string>
 
+struct MapOp {
+    int opcode ;
+    int arg1 ;
+    int arg2 ;
+};
+class CustomerRecord{
+private:
+    int customer_id;
+    int last_order;
+public:
+    CustomerRecord();
+    int GetCustomerId();
+    int GetLastOrder();
+    void SetCustomerId(int customerId);
+    void SetLastOrder(int lastOrder);
+    void Marshal(char *buffer);
+    int Size();
+    void Unmarshal(char *buffer);
+};
 class LaptopOrder {
 private:
 	int customer_id;
